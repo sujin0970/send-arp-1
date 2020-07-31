@@ -126,7 +126,6 @@ int main(int argc, char* argv[]) {
         struct EthArpPacket *etharp = (struct EthArpPacket *)reply_packet;
         if(etharp->eth_.type_!=htons(EthHdr::Arp) && etharp->arp_.op_!=htons(ArpHdr::Reply) && etharp->arp_.sip_!=htonl(Ip(sender_ip))) continue;
 
-        printf("resolving OK\n");
         packet.eth_.dmac_ = etharp->eth_.smac_;
         packet.arp_.tmac_ = etharp->arp_.smac_;
         packet.arp_.op_=htons(ArpHdr::Reply);
